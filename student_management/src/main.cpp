@@ -13,10 +13,11 @@
 
 int main()
 {
-  char c;
-  int y,x,i=0;
-  int cid;
-  int siz,xl;
+	//char c;
+	  int x;
+	  //int cid;
+	  //int siz;
+
   student st;
 
   cout<<"****************************************LOGIN********************************************\n";
