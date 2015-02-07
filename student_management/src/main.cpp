@@ -5,21 +5,35 @@
  *      Author: ajay
  */
 #include "../include/reg.h"
+#include "../include/database.h"
 #include <iostream>
 #include <fstream>
 #include <string.h>
 #include <stdio.h>
 #include <cstdlib>
+#include <vector>
+#include <iterator>
+
+#include <iostream>
+#include <iterator>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <sstream>
+using namespace std;
+
+
 
 int main()
 {
 	//char c;
 	  int x;
+	  string s,s1;
 	  //int cid;
 	  //int siz;
 
   student st;
-
+  database dat;
   cout<<"****************************************LOGIN********************************************\n";
 cout<<"Enter 1 for Login and 2 for Creating a new account\n";
 cin>>x;
@@ -27,7 +41,8 @@ system("clear");
 //existing user
 if (x==1)
 {
-
+    //dat.create_data();
+	dat.insert_data();
 }
 //new user
 else if(x==2)

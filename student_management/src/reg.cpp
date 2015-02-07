@@ -16,7 +16,8 @@ void student::reg()
 {
 	student st;
 	ofstream det;
-        ofstream acc;
+
+	ofstream acc;
 	string s;
 	acc.open ("account.csv", ios::out | ios::ate | ios::app) ;
 
