@@ -248,4 +248,46 @@ int database::edit_field(string entry,string old_str,string new_str,int database
 
 		}
 	}
+	return 0;
+}
+
+int database::search_field(string search,int database)
+{
+	string field,line,str,temp;
+	ifstream myfile;
+	size_t found;
+
+	switch(database)
+		{
+		case MAIN_DATABASE:
+		{
+			myfile.open("database.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+			while(getline(myfile,line))
+			{
+				found = line.find(search);
+				if(found!=string::npos)
+					cout<<line<<endl;
+
+			}
+	     break;
+		}
+		case SUBJECTS_DATABASE:
+		{
+			myfile.open("subjects.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+
+			break;
+		}
+		case MARKS_DATABASE:
+		{
+			myfile.open("marks.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+
+			break;
+		}
+
+		}
+	myfile.close();
+	return 0;
 }
