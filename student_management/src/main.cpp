@@ -41,8 +41,8 @@ system("clear");
 //existing user
 if (x==1)
 {
-    //dat.create_data();
-	dat.insert_data();
+   //dat.create_data(MARKS_DATABASE);
+	dat.insert_data(MARKS_DATABASE);
 }
 //new user
 else if(x==2)
