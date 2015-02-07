@@ -266,9 +266,7 @@ int database::search_field(string search,int database)
 			while(getline(myfile,line))
 			{
 				found = line.find(search);
-				if(found!=string::npos)
-					cout<<line<<endl;
-
+				if(found!=string::npos) cout<<line<<endl;
 			}
 	     break;
 		}
@@ -276,14 +274,22 @@ int database::search_field(string search,int database)
 		{
 			myfile.open("subjects.csv");
 			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
-
+			while(getline(myfile,line))
+			{
+				found = line.find(search);
+				if(found!=string::npos) cout<<line<<endl;
+			}
 			break;
 		}
 		case MARKS_DATABASE:
 		{
 			myfile.open("marks.csv");
 			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
-
+			while(getline(myfile,line))
+			{
+				found = line.find(search);
+				if(found!=string::npos) cout<<line<<endl;
+			}
 			break;
 		}
 
