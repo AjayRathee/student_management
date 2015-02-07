@@ -297,3 +297,102 @@ int database::search_field(string search,int database)
 	myfile.close();
 	return 0;
 }
+
+int database::delete_field(string entry,string del_str,int database)
+{
+
+	string field,line,str,temp;
+	fstream myfile;
+	ofstream tempfile;
+	size_t found;
+
+	switch(database)
+	{
+	case MAIN_DATABASE:
+	{
+		cout<<"Sorry you are not allowed to delete entries in Main Database"<<endl;
+		return -1;
+     break;
+	}
+	case SUBJECTS_DATABASE:
+	{
+		myfile.open("subjects.csv");
+		tempfile.open("subjects.csv.tmp");
+
+		if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+		if (!tempfile.is_open()) cout<<"Could not open"<<tempfile<<endl;
+
+		break;
+	}
+	case MARKS_DATABASE:
+	{
+		myfile.open("marks.csv");
+		tempfile.open("marks.csv.tmp");
+
+		if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+		if (!tempfile.is_open()) cout<<"Could not open"<<tempfile<<endl;
+
+		break;
+	}
+
+	}
+
+	if (myfile.is_open())
+	{
+		while(getline(myfile,line))
+		{
+			found = line.find(entry);
+			if(found!=string::npos) break;
+			tempfile<<line<<endl;
+		}
+		if(found == string::npos)
+		{
+			cout <<"Entry No "<<entry<<" not found"<<endl;
+			myfile.close();
+			return -1;
+		}
+		else
+		{
+
+		    size_t pos = line.find(del_str);
+			if(pos == string::npos)
+				{
+			  		cout <<"Entry "<<del_str<<" not found"<<endl;
+			  		myfile.close();
+			  		return -1;
+			  	}
+			else
+			   {
+					cout<<line.length()<<endl;
+					size_t file_pos = myfile.tellp();
+					cout<<file_pos<<endl;
+					//myfile.seekp(file_pos-line.length()); // move the cursor back
+					//cout<<myfile.tellp()<<endl;
+					line.replace(pos,del_str.length(),"#");
+					cout<<"Edit file "<<line<<endl;
+					tempfile<<line<<endl;
+					while(getline(myfile,line))  tempfile<<line<<endl;
+
+			   }
+		tempfile.close();
+		myfile.close();
+		// ********** cleanup*********
+        switch(database)
+        {
+        	case MAIN_DATABASE:
+
+        		break;
+        	case SUBJECTS_DATABASE:
+        	    if(rename("subjects.csv.tmp","subjects.csv")) cout<<"Error Renaming"<<endl;
+        	    return -1;
+        	    break;
+        	case MARKS_DATABASE:
+        	    if(rename("marks.csv.tmp","marks.csv")) cout<<"Error Renaming"<<endl;
+        	    return -1;
+        	    break;
+        }
+
+		}
+	}
+	return 0;
+}

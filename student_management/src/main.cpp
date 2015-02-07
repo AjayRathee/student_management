@@ -18,7 +18,6 @@
 using namespace std;
 
 
-
 int main()
 {
 	//char c;
@@ -38,8 +37,9 @@ if (x==1)
 {
    //dat.create_data(MARKS_DATABASE);
 	//dat.insert_data(MARKS_DATABASE);
-	//dat.edit_field("2014EET2793","RAM","RAM_SINGH",MAIN_DATABASE);
-	dat.search_field("IDL",MAIN_DATABASE);
+	dat.edit_field("2014EET2793","#","90",MARKS_DATABASE);
+	//dat.search_field("IDL",MAIN_DATABASE);
+	//dat.delete_field("2014EET2793","90",MARKS_DATABASE);
 }
 //new user
 else if(x==2)
