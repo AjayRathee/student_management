@@ -24,7 +24,7 @@ class database
 public:
 	void insert_data(int database);
 	void create_data(int database);
-	void edit_field(string str,int n);
+	int edit_field(string entry,string old_str,string new_str,int database);
 	void delete_field(string str,int n);
 };
 

@@ -121,7 +121,7 @@ void database::insert_data(int database = 0)
 				int s=0;
 				while(getline(ss,field,','))
 				{
-					if(s)
+					if(s) //skip first entry "entryno"
 					{
 						cout<<"Enter Marks for "<<field<<":";
 						cin>>temp;
@@ -147,7 +147,105 @@ void database::insert_data(int database = 0)
 	    }
 }
 
-void database::edit_field(string str,int n)
+int database::edit_field(string entry,string old_str,string new_str,int database)
 {
 
+	string field,line,str,temp;
+	fstream myfile;
+	ofstream tempfile;
+	size_t found;
+
+	switch(database)
+	{
+	case MAIN_DATABASE:
+	{
+		myfile.open("database.csv");
+		tempfile.open("database.csv.tmp");
+
+		if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+		if (!tempfile.is_open()) cout<<"Could not open"<<tempfile<<endl;
+
+     break;
+	}
+	case SUBJECTS_DATABASE:
+	{
+		myfile.open("subjects.csv");
+		tempfile.open("subjects.csv.tmp");
+
+		if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+		if (!tempfile.is_open()) cout<<"Could not open"<<tempfile<<endl;
+
+		break;
+	}
+	case MARKS_DATABASE:
+	{
+		myfile.open("marks.csv");
+		tempfile.open("marks.csv.tmp");
+
+		if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+		if (!tempfile.is_open()) cout<<"Could not open"<<tempfile<<endl;
+
+		break;
+	}
+
+	}
+
+	if (myfile.is_open())
+	{
+		while(getline(myfile,line))
+		{
+			found = line.find(entry);
+			if(found!=string::npos) break;
+			tempfile<<line<<endl;
+		}
+		if(found == string::npos)
+		{
+			cout <<"Entry No "<<entry<<" not found"<<endl;
+			myfile.close();
+			return -1;
+		}
+		else
+		{
+
+		    size_t pos = line.find(old_str);
+			if(pos == string::npos)
+				{
+			  		cout <<"Entry "<<old_str<<" not found"<<endl;
+			  		myfile.close();
+			  		return -1;
+			  	}
+			else
+			   {
+					cout<<line.length()<<endl;
+					size_t file_pos = myfile.tellp();
+					cout<<file_pos<<endl;
+					//myfile.seekp(file_pos-line.length()); // move the cursor back
+					//cout<<myfile.tellp()<<endl;
+					line.replace(pos,old_str.length(),new_str);
+					cout<<"Edit file "<<line<<endl;
+					tempfile<<line<<endl;
+					while(getline(myfile,line))  tempfile<<line<<endl;
+
+			   }
+		tempfile.close();
+		myfile.close();
+		// ********** cleanup*********
+        switch(database)
+        {
+        	case MAIN_DATABASE:
+        		if(rename("database.csv.tmp","database.csv")) cout<<"Error Renaming"<<endl;
+        		return -1;
+        		break;
+        	case SUBJECTS_DATABASE:
+        	    if(rename("subjects.csv.tmp","subjects.csv")) cout<<"Error Renaming"<<endl;
+        	    return -1;
+        	    break;
+        	case MARKS_DATABASE:
+        	    if(rename("marks.csv.tmp","marks.csv")) cout<<"Error Renaming"<<endl;
+        	    return -1;
+        	    break;
+        }
+
+		}
+	}
 }

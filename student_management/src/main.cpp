@@ -42,7 +42,8 @@ system("clear");
 if (x==1)
 {
    //dat.create_data(MARKS_DATABASE);
-	dat.insert_data(MARKS_DATABASE);
+	//dat.insert_data(MARKS_DATABASE);
+	dat.edit_field("2014EET2793","RAM","RAM_SINGH",MAIN_DATABASE);
 }
 //new user
 else if(x==2)
