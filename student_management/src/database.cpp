@@ -6,6 +6,7 @@
  */
 #include "../include/database.h"
 #include <sstream>
+#include <boost/algorithm/string.hpp>
 
 void database::create_data(int database = 0)
 {
@@ -394,5 +395,75 @@ int database::delete_field(string entry,string del_str,int database)
 
 		}
 	}
+	return 0;
+}
+
+int search_multi_field(string entry,string name,string dob,string dept,string degree)
+{
+
+	string field,line,str,temp;
+		ifstream myfile;
+		size_t found;
+
+		if(!entry.compare("#"))
+		{
+			myfile.open("database.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+			cout<<"Results for Entry Number:"<<endl;
+			while(getline(myfile,line))
+			{
+				found = line.find(entry);
+				if(found!=string::npos) cout<<line<<endl;
+			}
+		}
+
+		if(!name.compare("#"))
+		{
+			myfile.open("database.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+			cout<<"Results for Name:"<<endl;
+			while(getline(myfile,line))
+			{
+				found = line.find(entry);
+				if(found!=string::npos) cout<<line<<endl;
+			}
+		}
+
+		if(!dob.compare("#"))
+		{
+			myfile.open("database.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+			cout<<"Results for D.O.B:"<<endl;
+			while(getline(myfile,line))
+			{
+				found = line.find(entry);
+				if(found!=string::npos) cout<<line<<endl;
+			}
+		}
+
+		if(!dept.compare("#"))
+		{
+			myfile.open("database.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+			cout<<"Results for Department:"<<endl;
+			while(getline(myfile,line))
+			{
+				found = line.find(entry);
+				if(found!=string::npos) cout<<line<<endl;
+			}
+		}
+
+		if(!degree.compare("#"))
+		{
+			myfile.open("database.csv");
+			if (!myfile.is_open()) cout<<"Could not open"<<myfile<<endl;
+			cout<<"Results for Degree:"<<endl;
+			while(getline(myfile,line))
+			{
+				found = line.find(entry);
+				if(found!=string::npos) cout<<line<<endl;
+			}
+		}
+		myfile.close();
 	return 0;
 }

@@ -45,7 +45,6 @@ if (x==1)
 else if(x==2)
 {
 	st.reg();
-
 }
 else
 {

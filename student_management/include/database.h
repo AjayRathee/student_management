@@ -26,6 +26,7 @@ public:
 	void create_data(int database);
 	int edit_field(string entry,string old_str,string new_str,int database);
 	int search_field(string search,int database);
+	int search_multi_field(string entry,string name,string dob,string dept,string degree);
 	int delete_field(string entry,string del_str,int database);
 };
 
